@@ -1,0 +1,58 @@
+<!--conversation-header-->
+<studentchat ng-if="is_student">
+<div ng-if="conversation" class="conversation-header-resp wg_brd border_bottom_gray visible-xs visible-sm">
+  <p class="wg_p cl_1 tx-16 wg_c_p"> Conversacion con <span id="tutor-name">{$ tutor_name $}</span> </p>
+  <p class="wg_p cl_7 tx-16 wg_c_p"><span id="course-subject">{$ subject $}</span> </p>
+</div>
+<div ng-if="conversation" class="conversation-header wg_brd border_bottom_gray hidden-xs hidden-sm">
+  <span class="ico ico_discussion wg_f f_left "> </span>
+  <p class="wg_p cl_1 text_6 wg_c_p wg_d inline_b wg_m ml_10"> Conversacion con <span id="tutor-name">{$ tutor_name $}</span> </p>
+</div>
+<!-- end conversation header-->
+<!--container de mensajes-->
+<div ng-if="messages" class="conversation-lines wg_brd border_bottom_gray">
+  <!--container de chat saliente-->
+  <div ng-repeat="me in messages">
+    <messages id="messages"></messages>
+  </div>
+  <div ng-if="unreads" class="new-messages wg_m mt_30">
+    <p class="subtitle fancy wg_p cl_6 text_2 "><span>Nuevos mensajes</span></p>
+    <div ng-repeat="un in unreads">
+      <unreads id="unreads"></unreads>
+    </div>
+  </div>
+  <!--finaliza container de mensajes-->
+</div>
+<div ng-if="conversation">
+  <chatform></chatform>
+</div>
+</studentchat>
+<tutorchat ng-if="!is_student">
+<div ng-if="conversation" class="conversation-header-resp wg_brd border_bottom_gray visible-xs visible-sm">
+  <p class="wg_p cl_1 tx-16 wg_c_p"> Conversacion con <span id="tutor-name">{$ student_name $}</span> </p>
+  <p class="wg_p cl_7 tx-16 wg_c_p"><span id="course-subject">{$ subject $}</span> </p>
+</div>
+<div ng-if="conversation" class="conversation-header wg_brd border_bottom_gray hidden-xs hidden-sm">
+  <span class="ico ico_discussion wg_f f_left "> </span>
+  <p class="wg_p cl_1 text_6 wg_c_p wg_d inline_b wg_m ml_10"> Conversacion con <span id="tutor-name">{$ student_name $}</span> </p>
+</div>
+<!-- end conversation header-->
+<!--container de mensajes-->
+<div ng-if="tutor_messages" class="conversation-lines wg_brd border_bottom_gray">
+  <!--container de chat saliente-->
+  <div ng-repeat="me in tutor_messages">
+    <tutormessages id="messages"></tutormessages>
+  </div>
+  <div ng-if="tutor_unreads" class="new-messages wg_m mt_30">
+    <p class="subtitle fancy wg_p cl_6 text_2 "><span>Nuevos mensajes</span></p>
+    <div ng-repeat="un in tutor_unreads">
+      <tutorunreads id="unreads"></tutorunreads>
+    </div>
+  </div>
+  <!--finaliza container de mensajes-->
+</div>
+<div ng-if="conversation">
+  <tutorchatform></tutorchatform>
+</div>
+</tutorchat>
+<div class="visible-xs" id="isrwd"></div>

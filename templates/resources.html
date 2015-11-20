@@ -1,0 +1,167 @@
+{% extends 'base/courses/base.html' %}
+{% load copy %}
+{% load static from staticfiles %}
+{% block title %}Cursos - {{page_title}}{% endblock %}
+{% block head_js %}
+  <base href="/">
+  {% endblock head_js %}
+{%block section%}resources{%endblock%}
+
+{%block content%}
+
+<div class="wrapper wg_c_p p_lr_none">
+    <div class="row wg_m mt_55 course_container wg_c medium_gray ">
+        <div class="wg_c dark_gray fixed_side_bar" id="courses-side-bar">
+             {%include "courses/student/aside.html" with show_menu=True library_active=True %}
+        </div>
+        <div class="fluid_right_bar" ng-controller="LibraryController" id="library-main" style="opacity:0">
+            <div class="wg_m mt_15 mb_15 wg_brd filler">
+              <div class="row right-column">
+                  <div class="col-md-12">
+                      <!--div class="wg_alerts wg_alt_orange visible-xs visible-sm wg_m mb_20">
+                        <i class="icon ico_close"></i>
+                        <p class="wg_p cl_5 text-center tx-18 wg_c_p p_15 wg_c orange_alert wg_lh lh_24">Para tomar tus clases en vivo debes conectarte desde un computador de escritorio. <br>Desde tu móvil puedes: revisar tus recursos, escribirle a tu tutor o revisar los temas y fechas de tus siguientes clases!</p>
+
+                      </div-->
+
+                      <div id="header" class="wg_m mt_30 hidden-xs hidden-sm">
+                        <div class="header-title">
+                          <h1 id="title_h1" class="wg_p cl_1 text_8 wg_m mb_30">Libreria</h1>
+                        </div>
+
+
+                      </div>
+                      <div id="header-responsive" class="wg_m mt_20 visible-xs visible-sm">
+                        <div class="header-title">
+                          <h1 id="title_h1" class="wg_p cl_1 text_8 wg_m mb_20 text-center">Libreria</h1>
+                        </div>
+                      </div>
+                      <div id="resources-container-top" class="row wg_m mb_30">
+
+
+                          <div class="col-md-12 " >
+
+                              <div class="inl_block filter_container container visible-xs visible-sm" id="">
+                                <div class="select_bg">
+                                      <select name="materia" data-error-message="" id="materia" class="select_css for-dura" data-placeholder="Filtrar Recursos" data-required="true" data-notblank="true" ng-init="course = 0" ng-model="course" ng-change="filterRwd()">
+                                       <option value="">Todos los recursos</option>
+                                      {% for c in courses %}
+                                        <option value="{{c.id}}" id="select-{{c.id}}">{{c.subject.name}}</option>
+                                      {% endfor %}
+                                      </select>
+                                 </div>
+                              </div>
+
+                            <div class="wg_brd border_radius_default border_gray wg_c white course-selector hidden-xs hidden-sm" ng-init="course = 0">
+                              <div class="course-block wg_d inline_b active" ng-click="filterCourse(0)" id="tab-0">
+                                <p class="wg_p ellipsis cl_1 text_6 text-center sbjitem">Todos</p>
+                              </div>
+                              {% for c in courses %}
+                              <div class="course-block wg_d inline_b" ng-click="filterCourse({{c.id}})" id="tab-{{c.id}}">
+                                <p class="wg_p ellipsis cl_1 text_6 text-center sbjitem">{{c.subject.name}}</p>
+                              </div>
+                              {% endfor %}
+                            </div>
+
+                            <div class="wg_brd border_radius_default border_gray wg_c white wg_m mt_30 course-media" id="media_player" ng-init="playContent('resource-'+{{last.id}},false);">
+                              <div class="course-media-header wg_brd border_radius_tlr">
+
+                                <div class="course-icon hidden-xs wg_brd border_radius_tlr">
+                                  <span class="icon-{$ content_type $}">
+                                  </span>
+                                </div>
+                                <p class="wg_p ellipsis cl_5 text_5 wg_d inline_b wg_p pl_20" style="vertical-align: top;">{$ content_title $}</p>
+                              </div>
+                              <div class="course-media-media">
+                              </div>
+                              <div class="course-media-text">
+
+                                <p class="wg_p ellipsis cl_7 text_5  wg_c_p pb_10 ">{$ content_subject $}</p>
+                                <p class="wg_p wgr_p p_justify cl_1 tx-15 wg_d inline_b wg_c_p pb_5">{$ content_description $}</p>
+
+                                <div class="text-separator"></div>
+
+                                 <p class="wg_p cl_8 text_1 wg_c_p pb_5">Tutor: {$ content_tutor $}</p>
+                                 <p class="wg_p cl_8 text_1 wg_c_p pb_5">{$ content_date $}</p>
+
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+
+                       <div id="resources-container-bottom" class="wg_m mt_30">
+                         <!-- itero cursos -->
+
+
+
+                          <div class="wg_brd border_radius_default border_gray wg_c light_gray week-resources">
+
+                            <div class="week-resources-header">
+
+                              <p class="wg_p cl_1 text_13 wg_c_p pt_15 pl_30 wg_d ">Recursos Disponibles</p>
+                              <p class="wg_p cl_7 text_2 wg_c_p pb_20 pl_30 wg_m wg_d inline_b ">{$ filter_name $} </p>
+
+                            </div>
+                        <!-- itero recursos -->
+                        {% for course in courses %}
+                            {% for r in course.resources.all %}
+                            <!-- muestro e recurso si es de esta clase -->
+                              <div class="wg_brd border_top_gray resource-row active" ng-click="playContent('resource-'+{{r.id}},true);" id="resource-{{r.id}}" data-name="{{r.name}}" data-description="{{r.description}}" data-tutor="{{course.tutor.get_full_name}}" data-slug="{{r.slug}}" data-type="{{r.file_type}}" data-file="{{r.attachment}}" data-date="{{r.date_added}}" data-url="{{r.external_url}}" data-slug="{{r.slug}}" data-subject="{{r.subject.name}}" data-resource="{{r.id}}" ng-show="course === 0 || course === {{course.id}}">
+
+                                <div class="resource-icon ">
+                                  {% if r.file_type == "DOCUMENTO" %}
+                                  <span class="icon-document">
+                                  </span>
+                                  {% elif r.file_type == "VIDEO" %}
+                                  <span class="icon-video">
+                                  </span>
+                                  {% elif r.file_type == "ENLACE" %}
+                                  <span class="icon-link-2">
+                                  </span>
+                                  {% elif r.file_type == "IMAGEN" %}
+                                  <span class="icon-imagen">
+                                  </span>
+                                  {% else %}
+                                  <span class="icon-document">
+                                  </span>
+                                  {% endif %}
+                                   <p class="wg_p cl_7 text_1 text-center visible-xs visible-sm date_under_icon">{{r.date_added|date:"SHORT_DATE_FORMAT"}}</p>
+                                </div>
+                                <div class="resource-description">
+                                   <p class="wg_p cl_1 tx-20 wg_c_p wg_lh lh_21 wg_d inline_b">{{r.name}}</p>
+                                    <p class="wg_p cl_7 text_2 wg_c_p pr_30 wg_f f_right hidden-xs hidden-sm">{{r.date_added|date:"D d M Y"}}</p>
+                                    <p class="wg_p cl_8 text_1 wg_c_p pb_5">Tutor: {$ content_tutor $}</p>
+                                   <p class="wg_p cl_1 tx-15 wg_c_p pr_15 wg_lh lh_19">
+                                  {{r.description| truncatechars:140}}</p>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                            {% endfor %}
+                            </div>
+                        <div class="dummy_bottom_container"></div>
+                      </div>
+
+                  </div>
+                              <section class="wg_m mt_55 mb_80 wg_loader page page-section-coursesmain" id="loaderpage">
+              </section>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+{%endblock content%}
+
+
+{% block javascript%}
+<script src="{% static "components/requirejs/require.js" %}" data-main="{% static "src/new_js/library.js" %}">
+</script>
+{% comment %}
+<script data-main="{% static "build/new_js/library.js" %}" src="{% static "build/js/require.min.js" %}"></script>
+{% endcomment %}
+{%endblock javascript%}
+
+{% block nav_norequire %}
+{% endblock %}

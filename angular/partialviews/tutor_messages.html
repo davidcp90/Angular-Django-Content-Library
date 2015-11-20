@@ -1,0 +1,14 @@
+    <div ng-if="me.fields.sent_by_student && me.fields.readed_by_tutor" id="outcoming-chat">
+        <div class="pointer blue wg_m mr_5"></div>
+        <p class="wg_p cl_1 tx-mn wg_d inline_b wg_c_p pr_10">{$ student_name $}</p>
+        <p class="wg_p cl_7 tx-mn wg_d inline_b">{$ me.fields.date_sent| date:"EEEE d 'de' MMMM" $}</p>
+        <p class="wg_p cl_1 tx-mn wg_c_p pt_20 wg_lh lh_19 wg_m ml_15">{$ me.fields.message $}</p>
+    </div>
+    <!--fin container chat saliente-->
+    <!--container de chat entrante-->
+    <div ng-if="!me.fields.sent_by_student" id="incoming-chat" class="wg_brd">
+        <p class="wg_p cl_1 tx-mn wg_d inline_b wg_c_p pr_10">{$ tutor_name $}</p>
+        <p class="wg_p cl_7 tx-mn wg_d inline_b">{$ me.fields.date_sent| date:"EEEE d 'de' MMMM" $}</p>
+        <div class="pointer green wg_m ml_5"></div>
+        <p class="wg_p cl_1 tx-mn wg_c_p pt_20 wg_lh lh_19 wg_m mr_15">{$ me.fields.message $}</p>
+    </div>

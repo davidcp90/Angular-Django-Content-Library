@@ -1,0 +1,14 @@
+<div class="course_logo wg_c primary_blue"></div>
+
+<aside id="sidebar" class="courses_sidebar">
+
+          <ul id="side-menu">
+
+             <li><a href="{% url 'course_live' %}" id="live_class" class="wg_p ellipsis icon ico_my_classes item_menu {% if live_active %}active{% endif %}" target="_self" onclick="dataLayer.push({'event':'GAEvent','eventCategory':'MenuCurso','eventAction':'Clases en vivo','eventLabel':'Clases en vivo'})">Clases en vivo</a></li>
+             <li><a href="{% url 'course_resources' %}" id="library" class="wg_p ellipsis icon ico_my_classes item_menu {% if library_active %}active{% endif %}" target="_self" onclick="dataLayer.push({'event':'GAEvent','eventCategory':'MenuCurso','eventAction':'Libreria','eventLabel':'Libreria'})">Libreria</a></li>
+             <li><a href="{% url 'course_discussions' %}" id="discussion" class="wg_p ellipsis icon ico_my_classes item_menu {% if discussions_active %}active{% endif %}" target="_self" onclick="dataLayer.push({'event':'GAEvent','eventCategory':'MenuCurso','eventAction':'Discusiones','eventLabel':'Discusiones'})">Discusiones</a></li-->
+             <li><a href="{% url 'course_reports' %}" id="my_reports" class="wg_p ellipsis icon ico_my_classes item_menu {% if reports_active %}active{% endif %}" target="_self" onclick="dataLayer.push({'event':'GAEvent','eventCategory':'MenuCurso','eventAction':'Reportes','eventLabel':'Reportes'})">Reportes</a></li>
+
+         </ul>
+
+</aside>

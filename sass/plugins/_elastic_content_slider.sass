@@ -1,0 +1,85 @@
+//colors
+$color_shakespeare_approx: #47a3da
+$white: #fff
+$black_10: rgba(0,0,0,0.1)
+$white_90: rgba(255,255,255,0.9)
+
+//fonts
+$font_0: icomoon
+
+//@extend-elements
+//original selectors
+//.cbp-contentslider [class^="icon-"]:before, .cbp-contentslider [class*=" icon-"]:before
+.extend_1 
+    font-family: $font_0
+    font-style: normal
+    text-align: center
+    speak: none
+    font-weight: normal
+    line-height: 2.5
+    font-size: 2em
+    position: absolute
+    left: 10%
+    top: 50%
+    margin: -1.250em 0 0 0
+    height: 2.500em
+    width: 2.500em
+    color: $black_10
+
+
+//original selectors
+//.cbp-contentslider h3[class^="icon-"]:before, .cbp-contentslider h3[class*=" icon-"]:before
+.extend_2 
+    top: 0
+    left: 0
+    width: 2em
+    line-height: 1
+    height: 1.2em
+    margin: 0
+    color: $color_shakespeare_approx
+
+
+
+.cbp-contentslider 
+    width: 100%
+    height: 100%
+    position: relative
+
+    .cbp-content 
+        //If you use compass, instead of the line below you could use +column-rule($width, $style, $color)
+        column-rule: 1px dashed $color_shakespeare_approx
+        //If you use compass, instead of the line below you could use +column-count($count)
+        column-count: 2
+        //If you use compass, instead of the line below you could use +column-gap($width)
+        column-gap: 1em
+        vertical-align: top
+        padding: 1em 0
+
+    > ul 
+        list-style: none
+        height: 100%
+        width: 100%
+        overflow: hidden
+        position: relative
+        padding: 0
+        margin: 0
+        li 
+            position: absolute
+            height: 100%
+            left: 0
+            top: 0
+            &:target 
+                z-index: 100
+    li > div 
+        position: absolute
+        width: 100%
+        left: 0
+
+@media screen and(max-width: 43em) 
+    .cbp-contentslider 
+        h3 
+            font-size: 2em
+
+        .cbp-content 
+            //If you use compass, instead of the line below you could use +column-count($count)
+            column-count: 1

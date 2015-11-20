@@ -1,0 +1,91 @@
+/* Tooltip component by www.menucool.com */
+
+/*For tooltip target element that has set class="tooltip"*/
+
+.tooltip
+  text-decoration: none
+  border-bottom: 1px dotted #36c
+  color: #36c
+  outline: none
+
+/*For tooltip box*/
+
+div
+  &#mcTooltip
+    line-height: 16px
+    border-width: 1px
+    color: #333
+    border-color: #BBBBBB
+    padding: 6px 9px
+    font-size: 12px
+    font-family: Verdana, Arial
+    border-radius: 4px
+    /*Rounded corners. N/A for IE 8 and below.*/
+    box-shadow: 0 1px 6px #AAAAAA
+    /*Drop shadow. N/A for IE 8 and below.*/
+    background-color: #EAECF0
+  &.mcTooltipInner
+    background-color: #EAECF0
+  &#mcTooltip a
+    color: #36c
+  &#mcttCloseButton
+    width: 14px
+    height: 14px
+    position: absolute
+    background-image: image-url("closeBtn.gif")
+    cursor: pointer
+    overflow: hidden
+    top: 12px
+    right: 12px
+    left: auto
+  &#mcOverlay
+    background-color: white
+    opacity: 0.8
+    filter: alpha(opacity = 80)
+    display: none
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    overflow: visible
+    z-index: 4
+  &#tooltipAjaxSpin
+    margin: 20px 50px
+    background: transparent image-url("loading.gif") no-repeat center center
+    width: 50px
+    height: 30px
+    font-size: 0
+  &#mcTooltipWrapper
+    position: absolute
+    visibility: hidden
+    overflow: visible
+    z-index: 9999999999
+    top: 0px
+  &#mcTooltip
+    float: left
+    border-style: solid
+    position: relative
+    overflow: hidden
+  &.mcTooltipInner
+    float: left
+    position: relative
+    width: auto
+    height: auto
+  &#mcttCo
+    position: absolute
+    text-align: left
+    em, b
+      display: block
+      width: 0
+      height: 0
+      overflow: hidden
+
+/* For hyperlink within tooltip*/
+
+/*Close button. Available when sticky or overlay has been set to true, or is on iPhone, iPad, Android, BlackBerry, or IEMobile devices.*/
+
+/* Only applies when overlay has been set to true or 1*/
+
+/*Only available when calling by tooltip.ajax(...). It will be a spinning image indicating a request is in progress.*/
+
+/*The settings below should remain unchanged*/

@@ -1,0 +1,165 @@
+{% load static from staticfiles %}
+{% if user.is_authenticated %}
+    <div id="detect-mobile" class="visible-xs"></div>
+    <header id="header-rwd" class="{% if  user.tutor %} {% if not user.tutor.is_authorized_tutor %}is_authorized {% endif %} {% endif %} {% if home %}hide{% endif %}">
+    {% if user.is_authenticated  and user.tutor  %}
+        {% if not user.tutor.is_authorized_tutor %}
+            <div class="clearfix notificaction_full_profile">
+                <div class="container">
+                    <figure class="put-left">
+                        <img src="{{STATIC_URL}}imgs/tutor_feed/icon_warning.jpg" alt="icon_warning" alt="warning image">
+                    </figure>
+                    <div class="content-text">
+                        <p class="cl-1 text-1 center lh_2_5 put-left">Tu cuenta  aún esta incompleta, continua el siguiente paso: </p>
+                        <a href="{% url 'tutor_profile_complete' %}" class="button send">VER GUIA</a>
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+        <nav class="wrapper-rwd navbar-default">
+            <ul id="navigation" class="public">
+                {% if not user.is_authenticated %}
+                    <li class="logo"><a class="no-hover" href="/" onclick="mixpanel.track('Header - Home')"><img class="logo" src="{{STATIC_URL}}imgs/header/logo.png" alt="logo tutorya"></a></li>
+                    <!--li ><a class="no-hover" href="/" onclick="mixpanel.track('Header - Home')"><i class="icon icon-home"> </i><span class="inicio">Inicio</span></a></li-->
+                {% else %}
+                    {% if user.tutor %}
+                        <li class="logo"><a class="no-hover" href="{%url 'feed_todas' %}" onclick="mixpanel.track('Header - FeedTutor')"><img class="logo" src="{{STATIC_URL}}imgs/header/logo.png" alt="logo tutorya"></a></li>
+                        <!--li ><a class="no-hover" href="{%url 'feed_todas' %}" onclick="mixpanel.track('Header - FeedTutor')"><i class="icon icon-home"> </i> <span class="inicio">Inicio</span></a></li-->
+                    {% else %}
+                        <button type="button" class="navbar-toggle wg_z z_up" data-toggle="collapse" data-target=".navbar-collapse" onclick='$("body").toggleClass("show_sidebar"); '>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                         <button type="button" class="navbar-toggle navbar-toggle-triangle wg_f f_righ visible-xs visible-sm" data-toggle="collapse" data-target=".navbar-collapse" onclick='' id="user-prefer-responsive">
+                            <span class="icon-triangle"></span>
+                           
+                        </button>
+                        <ul id="dropdown-top-responsive" class="hidden-lg hidden-md" style="">
+                            <!--li><a href="/perfiles/estudiante/preferencias">Editar Perfil</a></li>
+                            <li><a href="/perfiles/estudiante/saldo">Mi Saldo</a></li>
+                            <li><a href="/preguntas/tutorteca/">Tutorteca</a></li>
+                            <li><a href="/terminos-de-uso">Terminos de Uso</a></li-->
+                                <span class="nameonmenu">{{user.first_name }}</span>
+                            <li><a class="wg_c_p pl_10" href="/cuentas/logout">Cerrar sesión</a></li>
+                        </ul>
+                        <li class="logo"><a class="no-hover" href="{% url 'course_live' %}" onclick="mixpanel.track('Header - FeedEstudiante')"><img class="logo" src="{{STATIC_URL}}imgs/header/logo.png" alt="logo tutorya"></a></li>
+                        <!--li ><a class="no-hover" href="{% url 'student_profile_applications' %}" onclick="mixpanel.track('Header - FeedEstudiante')"><i class="icon icon-home"> </i> <span class="inicio">Inicio</span></a></li-->
+                       
+                    {% endif %}
+                {% endif %}
+
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'login_view' %}"  id="logIn" onclick="mixpanel.track('Header - Login')">Ingresar</a></li>
+                {% endif %}
+
+            </ul>
+
+            {% if user.is_authenticated %}
+                {% if not user.is_tutor %}
+                    {% if save_header %}
+                        <a href="#" class="main-cta header" id="save-top"> Guardar Perfil</a>
+                    {% else %}
+                        <ul id="notifications">
+                            <li><a href="#" class="main-cta" id="save-top"> Guardar </a></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    {% endif %}
+                {% endif %}
+                <div id="personal-menu">
+
+                    <!--div class="circle-menu">
+                    {% if user.tutor.get_profile_image_small %}
+                        <img src="{{user.tutor.get_profile_image_small}}" alt="">
+                    {% else %}
+                        <img src="{{STATIC_URL}}imgs/tutor_placeholder.jpg" alt="">
+                    {% endif %}
+                    </div-->
+
+                    <li class="username wg_m mr_20" id="user-prefer" >{{user.first_name }}<i class="icon-triangle wg_pt p_absolute wg_m ml_10" style="top:40%;"> </i>
+
+                    <ul id="dropdown-top" class="">
+
+                        {% if user.tutor %}
+                        <li><a href="{% url 'tutor_profile' %}">Editar Perfil</a></li>
+                        <li><a href="{% url 'tutor_profile_balance' %}">Saldo</a></li>
+                        <li><a href="{% url 'tutor_profile_preferences' %}">Preferencias</a></li>
+
+                        {% else %}
+                        <!--li><a href="{% url 'student_profile_preferences' %}">Editar Perfil</a></li>
+                        <li><a href="{% url 'student_profile_balance' %}">Mi Saldo</a></li>
+                        <li><a href="{% url 'answer_library' %}">Tutorteca</a></li-->
+                        {% endif %}
+                        <!--li ><a href="{%url 'tdu' %}">Terminos de Uso</a></li-->
+                        <li><a class="" href="/cuentas/logout">Cerrar sesión</a></li>
+                    </ul>
+
+
+                    </li>
+
+                </div>
+            {% else %}
+            <div id="call-to-register">
+
+                <a href="{%url 'solicitud_publica'%}" class="button send large" id="sigIn"><i class="icon icon-pencil"> </i> tomar tutoria</a>
+            </div>
+
+            {% endif %}
+
+        </nav>
+    </header>
+    {% if user.is_authenticated  and user.tutor  %}
+        {% if not user.tutor.is_authorized_tutor %}
+            <div class="separator">
+
+            </div>
+        {% endif %}
+    {% endif %}
+
+{% else %}
+<!--Version Bootstrap-->
+
+ <div class="navbar navbar-default navbar-fixed-top {% if home %}hide{% endif %}" role="navigation" id="header-public">
+
+      <div class="container">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/" onclick="mixpanel.track('Header - Home')">
+          <img src="{% static 'imgs/header/logo.png'%}" alt="logo tutorya" class="img-responsive"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <div class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav">
+            <!-- render login -->
+            <!--li><a href="{% url 'login_view' %}" id="a_login2">Inicia Sesi%oacute;n</a></li-->
+            {% if not home %}
+            <!--li><a href="{%url 'precios' %}" id="link-h-prices" onclick="mixpanel.track('Header - Precios')">Precios</a></li-->
+            {% endif %}
+            <li><a href="javascript:void(0);" onclick="document.getElementById('hide-btn').click();mixpanel.track('Header - Login')" id="a_login">Inicia Sesi&oacute;n</a></li>
+            <!-- 2nd way to modal -->
+            <!--li><a href="javascript:void(0);" onclick="document.getElementById('hide-btn').click();" id="login-link-header">Ingresar</a></li-->
+            <li class="cta">
+            <a href="javascript:void(0);" onclick="document.getElementById('hide-btn').click();mixpanel.track('Header - Registrate')" id="link-header" class="custom">Regístrate</a>
+            </li>
+            <!--li class="visible-xs"><a href="{%url 'acerca-de' %}" >Acerca De</a></li>
+            <li class="visible-xs"><a href="{%url 'home_blog' %}" >Blog</a></li>
+            <li class="visible-xs"><a href="{%url 'be-tutor' %}" >Ser Tutor</a></li>
+            <li class="visible-xs"><a href="{%url 'tdu' %}">Terminos de Uso</a></li-->
+            </ul>
+          </div>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
+{% endif %}

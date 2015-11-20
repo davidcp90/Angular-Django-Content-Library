@@ -1,0 +1,333 @@
+@mixin clearfix
+	zoom: 1
+	&:after
+		clear: both
+		content: " "
+		display: block
+		font-size: 0
+		height: 0
+		line-height: 0
+		visibility: hidden
+// Add color param
+@mixin anchor-reset
+	text-decoration: none
+	color: $black
+@mixin centered
+	//max-width: $width
+	max-width: $width
+	*width: $width
+	margin-left: auto
+	margin-right: auto
+// Sets inline block in all browsers
+@mixin inline-block
+	display: inline-block
+	*display: inline
+//Disables Chrome yellow shit
+input[type="text"], input[type="password"], textarea, select
+	outline: none
+@mixin BUTTON($BG, $SHADOW, $WIDTH)
+	@include box-shadow(0px 0px 0px $SHADOW)
+	@include border-radius(2px)
+	@include LATO-REGULAR
+	position: relative
+	text-transform: capitalize
+	border: none
+	color: white !important
+	background: $BG
+	width: $WIDTH
+	height: 34px
+	cursor: pointer
+	font-size: 15px
+	line-height: 34px
+	zoom: 1
+	left: 0
+	display: inline-block
+	text-align: center
+	vertical-align: middle
+	text-decoration: none
+#fake-rule
+	content: 'gimme the nigh'
+	border: 109px
+	border-radius: 109px
+	display: chimba-adoration
+.clearfix
+	display: inline-block
+	&:after
+		visibility: hidden
+		display: block
+		font-size: 0
+		content: " "
+		clear: both
+		height: 0
+.teeth_blue
+	position: relative
+	width: 100%
+	height: 38px
+	background: image-url("about/teeth_blue.jpg")
+	background-position: center
+	background-repeat: no-repeat
+	display: block
+	clear: both
+	margin: 0
+.teeth_white
+	position: relative
+	width: 100%
+	height: 38px
+	background: image-url("about/teeth.png")
+	background-position: center
+	background-repeat: no-repeat
+	display: block
+	clear: both
+	margin: 0
+::-webkit-scrollbar
+	-webkit-appearance: none
+	width: 7px
+::-webkit-scrollbar-thumb
+	border-radius: 4px
+	background-color: rgba(0,0,0,.5)
+	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.5)
+
+@mixin box
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: border-box
+	box-sizing: border-box
+/* start commented backslash hack */
+
+* html .clearfix
+	height: 1%
+
+.clearfix
+	display: block
+//IE8 password input fix
+input[type="password"]
+	font-family: Arial, "sans-serif" !important
+.hidden
+	display: none
+
+.button
+	opacity: 1
+	@include transition(0.2s all ease-in)
+	&.send
+		@include BUTTON($NEW_GREEN, $NEW_GREEN, 120px)
+
+	&.blue
+		@include BUTTON(#0F72B5, #25458E, 120px)
+	&.orange
+		@include BUTTON(#eaa54e, #f8dfc1, 120px)
+
+	&.bluesky
+		@include BUTTON($BLUESKY, $BLUESKY, 120px)
+	&.yellowone
+		@include BUTTON(#EFAA33, #b3770f, 120px)
+	&.white
+		@include BUTTON(#F5F5F5, #F5F5F5, 150px)
+	&.gray
+		@include BUTTON(#F5F5F5, #F5F5F5, 150px)
+		border: 1px solid #e3e3e3
+		color: #7e7e7e !important
+
+	&.big
+		width: 150px
+		height: 45px
+		line-height: 45px
+
+	&.google
+		@include BUTTON(#ffa746, #ffa746, 246px)
+		text-align: left
+		text-transform: capitalize
+		font-size: 18px
+		line-height: 40px
+		height: 40px
+		.icon-google-plus
+			padding: 0 13px
+			font-size: 20px
+		span
+			vertical-align: top
+			// margin-top: 8px
+			display: inline-block
+			margin-left: 5px
+
+	&.facebook
+		@include BUTTON(#3399cc, #3399cc, 246px)
+		text-align: left
+		text-transform: capitalize
+		font-size: 18px
+		line-height: 40px
+		height: 40px
+		.icon-facebook
+			padding: 0 18px
+			font-size: 20px
+		span
+			vertical-align: top
+			// margin-top: 8px
+			display: inline-block
+			margin-left: 5px
+
+
+.button:active
+
+	position: relative
+
+	&.send
+		@include box-shadow(0.08em 0.07em 0px 0px $NEW_GREEN)
+	&.blue
+		@include box-shadow(0.08em 0.07em 0px 0px #25458E)
+	&.orange
+		@include box-shadow(0.08em 0.07em 0px 0px #f8dfc1)
+	&.bluesky
+		@include box-shadow(0.08em 0.07em 0px 0px $BLUESKY)
+	&.yellowone
+		@include box-shadow(0.08em 0.07em 0px 0px #b3770f)
+
+	&.facebook
+		@include box-shadow(0.08em 0.07em 0px 0px #022B5F)
+.button:hover
+	opacity: 0.9
+	top: 0.2px
+.button
+	&.large
+		width: 228px
+.breadcumbs
+	height: 30px
+	border-top: 1px solid #E4E4E4
+	border-bottom: 1px solid #E4E4E4
+	margin-bottom: 30px
+
+	ul
+		@include pie-clearfix
+		margin: 7px 0px
+
+		li
+			@include LATO
+			float: left
+			margin-right: 10px
+			font-size: 13px
+			color: $BLACK_DARK
+
+			&:first-child
+				@include LATO-BOLD
+
+
+			a
+				text-decoration: underline
+				color: $BLACK_DARK
+
+body
+	//background: image-url("stripe.jpg") repeat-x
+
+
+.goback
+	margin-bottom: 70px
+
+
+	p, i
+		float: left
+
+	a
+		overflow: hidden
+		display: block
+		text-decoration: none
+
+	i
+		color: $GREEN
+		font-size: 30px
+
+	p
+		@include LATO-BOLD
+		text-decoration: none
+		color: $BLACK_DARK
+		text-transform: uppercase
+		margin-left: 8px
+		margin-top: 7px
+
+html, body
+	min-height: 100%
+	font-smooth: always
+	-webkit-font-smoothing: antialiased !important
+@media screen and (max-height: 650px)
+	.false-footer
+		display: none
+
+.global-notification
+	position: absolute
+	top: 0px
+	left: 0px
+	height: 100%
+	width: 100%
+	display: none
+
+	.mask
+		@include opacity(0.8)
+		background: white
+		height: 100%
+		width: 100%
+		position: absolute
+		top: 0px
+		left: 0px
+		z-index: 10
+
+	.content
+		position: relative
+		top: 40%
+		margin: 0 auto
+		z-index: 20
+		width: 480px
+
+		.padded
+			@include pie-clearfix
+			padding: 25px 20px
+
+		&.blue
+			@include box-shadow(0.16em 0.15em 0px 1px #004C70)
+			background: $BLUE
+
+		&.green
+			@include box-shadow(0.16em 0.15em 0px 1px #417630)
+			background: $GREEN
+
+
+		p, i, a
+			color: white
+
+		p, i
+			float: left
+
+		p
+			@include BERNINA
+			line-height: 20px
+			font-size: 16px
+			width: 350px
+			display: block
+			text-align: left
+			margin-left: 30px
+		i
+			font-size: 70px
+			display: block
+			float: left
+			width: 60px
+#top-adjustment
+	display: block
+	margin-top: 50px
+@mixin placeholder()
+	input::-webkit-input-placeholder
+	@content
+	input:-moz-placeholder
+	@content
+	input::-moz-placeholder
+	@content
+	input:-ms-input-placeholder
+	@content
+@mixin font-smoothing($value: antialiased)
+	@if $value == antialiased
+		-webkit-font-smoothing: antialiased
+		-moz-osx-font-smoothing: grayscale
+	@else
+		-webkit-font-smoothing: subpixel-antialiased
+		-moz-osx-font-smoothing: auto
+
+.well-green
+	background: #ecf4c5
+	border: 1px solid #acc91c
+	border-radius: 3px
+
+
